@@ -10,7 +10,16 @@ import SearchPanel from '../search-panel/search-panel';
 const App = () => {
 	return (
 		<div className="app">
-			<h2>fdd</h2>
+
+			<AppInfo />
+			<div className="search-panel">
+				<SearchPanel />
+				<AppFilter />
+			</div>
+
+			<EmployeesList />
+			<EmployeesAddForm />
+
 		</div>
 	);
 }
