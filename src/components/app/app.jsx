@@ -10,11 +10,11 @@ import SearchPanel from '../search-panel/search-panel';
 const App = () => {
 
 	const data = [
-		{ name: "Alex", salary: 1500, increase: true },
-		{ name: "Mark", salary: 1100, increase: true },
-		{ name: "Bob", salary: 1900, increase: false }
+		{ name: "Alex", salary: 1500, increase: true, id: 1 },
+		{ name: "Mark", salary: 1100, increase: true, id: 2 },
+		{ name: "Bob", salary: 1900, increase: false, id: 3 }
 	]
-
+	
 	return (
 		<div className="app">
 

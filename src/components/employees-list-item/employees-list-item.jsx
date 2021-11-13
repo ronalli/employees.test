@@ -1,27 +1,45 @@
+import { Component } from 'react';
 import './employees-list-item.css'
 
-const EmployeesListItem = ({ name, salary, increase }) => {
+class EmployeesListItem extends Component {
 
-	let defaultClass = "list-group-item d-flex justify-content-between";
-	let classList = increase ? defaultClass + ' increase' : defaultClass;
+	constructor(props) {
+		super(props)
+		this.state = {
+			increase: this.props.increase,
+		}
+	}
 
-	return (
-		<li className={classList}>
-			<span className="list-group-item-label">{name}</span>
-			<input type="text" className="list-group-item-input" defaultValue={salary + "$"} />
-			<div className="f-flex justify-content-center align-items-center">
-				<button type="button" className="btn-cookie btn-sm">
-					<i className="fas fa-cookie"></i>
-				</button>
+	onIncrease = () => {
+		if (this.state.increase) this.setState({ increase: false })
+		else this.setState({ increase: true })
+	}
 
-				<button type="button" className="btn-trash btn-sm">
-					<i className="fas fa-trash"></i>
-				</button>
+	salaryPerson
 
-				<i className="fas fa-star"></i>
-			</div>
-		</li>
-	);
+	render() {
+		const { name, salary } = this.props;
+		let defaultClass = "list-group-item d-flex justify-content-between";
+		let classList = this.state.increase ? defaultClass + ' increase' : defaultClass;
+
+		return (
+			<li className={classList}>
+				<span className="list-group-item-label">{name}</span>
+				<input type="text" className="list-group-item-input" defaultValue={salary + "$"} />
+				<div className="f-flex justify-content-center align-items-center">
+					<button type="button" className="btn-cookie btn-sm" onClick={this.onIncrease}>
+						<i className="fas fa-cookie"></i>
+					</button>
+
+					<button type="button" className="btn-trash btn-sm">
+						<i className="fas fa-trash"></i>
+					</button>
+
+					<i className="fas fa-star"></i>
+				</div>
+			</li>
+		);
+	}
 }
 
 export default EmployeesListItem;
