@@ -7,24 +7,37 @@ class EmployeesListItem extends Component {
 		super(props)
 		this.state = {
 			increase: this.props.increase,
+			rise: false
 		}
 	}
 
 	onIncrease = () => {
-		if (this.state.increase) this.setState({ increase: false })
-		else this.setState({ increase: true })
+		this.setState(({ increase }) => ({
+			increase: !increase
+		}))
 	}
 
-	salaryPerson
+	onRise = (e) => {
+		this.setState(({ rise }) => ({
+			rise: !rise
+		}))
+	}
 
 	render() {
 		const { name, salary } = this.props;
+		const { increase, rise } = this.state;
 		let defaultClass = "list-group-item d-flex justify-content-between";
-		let classList = this.state.increase ? defaultClass + ' increase' : defaultClass;
+
+		if (increase) {
+			defaultClass += ' increase';
+		}
+		if (rise) {
+			defaultClass += ' like';
+		}
 
 		return (
-			<li className={classList}>
-				<span className="list-group-item-label">{name}</span>
+			<li className={defaultClass}  >
+				<span onClick={this.onRise} className="list-group-item-label">{name}</span>
 				<input type="text" className="list-group-item-input" defaultValue={salary + "$"} />
 				<div className="f-flex justify-content-center align-items-center">
 					<button type="button" className="btn-cookie btn-sm" onClick={this.onIncrease}>
