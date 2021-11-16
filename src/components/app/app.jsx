@@ -30,21 +30,15 @@ class App extends Component {
 		})
 	}
 
-	onToggleIncrease = (id) => {
+	onToggleProp = (id, prop) => {
 		this.setState(({ data }) => ({
 			data: data.map(element => {
 				if (element.id === id) {
-					return { ...element, increase: !element.increase }
+					return { ...element, [prop]: !element[prop] }
 				}
 				return element
 			})
 		}))
-		// console.log(`this increase ${id}`);
-	}
-
-	onToggleRise = (id) => {
-		console.log(`this rise ${id}`);
-
 	}
 
 	random = () => {
@@ -69,7 +63,7 @@ class App extends Component {
 	render() {
 
 		const employees = this.state.data.length;
-		const increased = this.state.data.filter(item => item.increase === true).length
+		const increased = this.state.data.filter(item => item.increase).length
 
 		// console.log(employees, increased)
 
@@ -88,8 +82,7 @@ class App extends Component {
 				<EmployeesList
 					data={this.state.data}
 					onDelete={this.onDeleteElement}
-					onToggleIncrease={this.onToggleIncrease}
-					onToggleRise={this.onToggleRise}
+					onToggleProp={this.onToggleProp}
 				/>
 				<EmployeesAddForm
 					addElement={this.addElement}
