@@ -30,13 +30,36 @@ class App extends Component {
 		})
 	}
 
+	onToggleIncrease = (id) => {
+		this.setState(({ data }) => ({
+			data: data.map(element => {
+				if (element.id === id) {
+					return { ...element, increase: !element.increase }
+				}
+				return element
+			})
+		}))
+		// console.log(`this increase ${id}`);
+	}
+
+	onToggleRise = (id) => {
+		console.log(`this rise ${id}`);
+
+	}
+
 	random = () => {
 		return Date.now();
 	}
 
 	addElement = (name, salary) => {
 		this.setState(({ data }) => {
-			let element = { name, salary, increase: false, id: this.random() }
+			let element = {
+				name,
+				salary,
+				increase: false,
+				rise: false,
+				id: this.random()
+			}
 			return {
 				data: [...data, element]
 			}
@@ -44,10 +67,19 @@ class App extends Component {
 	}
 
 	render() {
+
+		const employees = this.state.data.length;
+		const increased = this.state.data.filter(item => item.increase === true).length
+
+		// console.log(employees, increased)
+
 		return (
 			<div className="app" >
 
-				<AppInfo />
+				<AppInfo
+					employees={employees}
+					increased={increased}
+				/>
 				<div className="search-panel">
 					<SearchPanel />
 					<AppFilter />
@@ -56,7 +88,8 @@ class App extends Component {
 				<EmployeesList
 					data={this.state.data}
 					onDelete={this.onDeleteElement}
-
+					onToggleIncrease={this.onToggleIncrease}
+					onToggleRise={this.onToggleRise}
 				/>
 				<EmployeesAddForm
 					addElement={this.addElement}
